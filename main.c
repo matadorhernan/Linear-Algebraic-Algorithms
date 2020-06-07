@@ -588,20 +588,6 @@ int KM75_arrayTranspose()
     return 0;
 }
 
-double KM75_arrayCramer()
-{
-    KM75_arrayMemcpy();
-
-    for (int i = 0; i < mn; ++i)
-        res[i][mn - 1] = res[mn];
-
-    double det_tmp = det(tmp);
-    deinit_square_matrix(tmp);
-    KM75_scanConstants;
-
-    return det_tmp / det_A;
-}
-
 /*
 * $bootstrap KM75_appBootstrapper 
 * This function bootstraps all other important functions, executes selected blocks.
