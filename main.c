@@ -35,11 +35,11 @@
 Declaration of Include files 
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
-#include "constants.h"
+#include <stdio.h>     // access terminal
+#include <stdlib.h>    // access system
+#include <stdbool.h>   // boolean variables
+#include <string.h>    // string functions
+#include "constants.h" // constants
 
 /*
 Declaration of Global Variables
@@ -84,7 +84,7 @@ bool KM75_appBootstrapper();
 /*
 * $console KM75_printTitle
 * This block will print ACSII art  with a neat title just below, all lines are printed to welcome the user.
-* Time complexity: the execution time is defined by O(1).
+* Time complexity: O(1).
 * 
 * @return int 0: this block returns 0 when it ends its execution 
 */
@@ -120,7 +120,7 @@ int KM75_printTitle()
 /*
 * $console KM75_scanSelect
 * This function will read and validate the user's input as a character, and then flush stdin. An invalid input means this function will return SELECT_INVALID.
-* Time complexity: unknown, execution time is completely user dependant.
+* Time complexity: unknown.
 *
 * @param char *text: string to print before scanning input
 * @param int size: the count of allowed inputs starting from Aa
@@ -148,7 +148,7 @@ char KM75_scanSelect(const char *text, const int size)
 /*
 * $console KM75_scanNumber\
 * This function is a mirrored <<KM75_scanSelect>>, it will read and validate input as an integer number, and then flush stdin. An invalid input means this function will return 0.
-* Time complexity: unknown, execution time is completely user dependant.
+* Time complexity: unknown.
 *
 * @param char *text: string to print before scanning input
 * @return int scanned or 0
@@ -166,7 +166,7 @@ float KM75_scanNumber(const char *text, bool int_only)
 /*
 * $console KM75_listSelect
 * This function will list options from {texts} to the user through the process' console as a list, and capture the selected option as a char, if an invalid choice is detected a loop is performed.
-* Time complexity: unknown, execution time is completely user dependant.
+* Time complexity: unknown.
 *
 * @param char *texts[] : the menu as an array of strings,
 * @param int size : sizeof *texts[].
@@ -193,7 +193,7 @@ char KM75_listSelect(const char *texts[], const int size)
 /*
 * $console KM75_exitApp
 * Will pause the execution system and then close the main thread therefore terminating the execution process.
-* Time complexity: unknown, execution time is completely user dependant.
+* Time complexity: unknown.
 *
 * @param char *text : the text to print when closing
 * @return void: the app closes within this block
@@ -208,7 +208,7 @@ void KM75_exitApp(const char *text)
 /*
 * $console KM75_arraySizer 
 * This block will return the captured current global matrix size, validate for a minimum allowed and maximum allowed and loop until the captured value is valid.
-* Time complexity: if param edit_mn == false, then the execution time will be defined by O(1); otherwise it's unknown, as it's user dependant.
+* Time complexity: O(1).
 * 
 * @param bool edit_mn : true to read input mn or false for default
 * @param bool is_m : true to scan for M or false for N
@@ -238,7 +238,7 @@ int KM75_arraySizer(bool edit_mn)
 /*
 * $console KM75_arrayEditor
 * This function will zero selected matrixes or capture matrix data from the user.
-* Time complexity: if param zero_only == true, then the execution time will be defined by O(N^2); otherwise it's unknown, as it's user dependant.
+* Time complexity: O(N^2).
 * 
 * @param bool fill_only : if true block will reset the selected array to a zeroed array
 * @param bool fill_only : if true block will edit a, otherwise false it will edit b
@@ -285,7 +285,7 @@ int KM75_arrayEditor(bool zero_only, bool is_res, bool is_a)
 /* 
 * $exec KM75_arrayMenu
 * This function bootstraps all other important functions to edit arrays, validates said arrays and executes selected blocks.
-* Time complexity: if a or b are not being edited, then the execution time is O(2N^2); otherwise it will be unknown, as execution time is user dependant,
+* Time complexity: O(2N^2).
 *
 * @param bool is_a : if true this block will let the user define matrix a, if false matrix b
 * @return int 0 : this block returns 0 when it ends its execution 
@@ -325,7 +325,7 @@ int KM75_arrayMenu(bool is_a)
 /*
 * $console KM75_arrayPrinter
 * This function may be called to print a matrix, the selected matrix will be logged with its corresponding columns, rows and spaces.
-* Time complexity: this block's execution time is defined by O(N^2 + N);
+* Time complexity: O(N^2 + N).
 *
 * @param bool is_res : if true this block will print the res matrix
 * @param bool is_a : if true this block will print matrix a, if false matrix b
@@ -353,7 +353,7 @@ int KM75_arrayPrinter(bool is_res, bool is_sys, bool is_a)
 /*
 * $exec KM75_arrayDot
 * This function will perform a matmul operation of two matrixes, matrixes a and b (Global Variables), using Eric Weiser's method. 
-* Time complexity: O(N^3 + 2N^2 + N), the total execution time from child functions is O(2N^2 + N).
+* Time complexity: O(N^3 + 2N^2 + N).
 *
 * @return int 0 : this block returns 0 when it ends its execution 
 */
@@ -380,7 +380,7 @@ int KM75_arrayDot()
 /*
 * $exec KM75_arraySum
 * This function performs a sum of two matrixes, namely a and b (Global Variables). 
-* Time complexity: the time complexity of this function is O(3N^2 + N + 1), mainly because this block contains two other functions of the time complexity O(N^2 +  N + 1). 
+* Time complexity: O(3N^2 + N + 1). 
 *
 * @return int 0 : this block returns 0 when it ends its execution 
 */
@@ -413,7 +413,7 @@ int KM75_arrayMemcpy()
 /*
 * $exec KM75_scanConstants
 * This block adds an extra column to res with a set of defined constants, procedural linear equations are calculated here.
-* Time complexity: unknown, time of execution is completely user dependant.
+* Time complexity: unknown.
 *
 * @return int 0 : this block returns 0 when it ends its execution 
 */
@@ -521,7 +521,7 @@ int KM75_arrayBkwdSubs()
 /*
 * $exec KM75_arrayGaussian 
 * This function will execute other blocks, related to gaussian elimination. And predict if the system of equations can or cannot be solved.
-* Time complexity: unknown, execution time is completely user dependant.
+* Time complexity: unknown.
 *
 * @return int 0 : this block returns 0 when it ends its execution 
 */
