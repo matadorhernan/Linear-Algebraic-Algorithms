@@ -1,4 +1,4 @@
-# Linear Alogorithms
+# Alogorithms for Linear Algebra and Matrixes
 
 ## Description
 
