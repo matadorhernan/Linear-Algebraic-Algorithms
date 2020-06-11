@@ -8,6 +8,7 @@ extern const char PRINT_RES_TEXT[] = "Resultado: ";                             
 extern const char DOT_MATRIX_TEXT[] = "Dot Product of A and B: ";                                   // (editable) before dot matrix
 extern const char SUM_MATRIX_TEXT[] = "Sum of A and B: ";                                           // (editable) before sum matrix
 extern const char GAUSSIAN_MATRIX_TEXT[] = "Performing Gaussian Elimination on Matrix A";           // (editable) before gaussian matrix
+extern const char CRAMER_MATRIX_TEXT[] = "Solving Matrix A with Cramer's Rule";                     // (editable) before gaussian matrix
 extern const char MATRIX_INFINITE[] = "Detected infinitely many solutions.";                        // (editable) system with too many answers
 extern const char MATRIX_INCONSISTANT[] = "Invalid, system is inconsistant.";                       // (editable) system with no answers
 extern const char RESET_MATRIX_WARNING[] = "This will reset A and B";                               // (editable) before scanning matrix again

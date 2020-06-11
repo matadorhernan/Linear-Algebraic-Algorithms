@@ -373,8 +373,8 @@ int KM75_arraySum(float argv_a[11][11], float argv_b[11][11])
 */
 int KM75_arrayMemcpy(float argv_des[11][11], float argv_srs[11][11])
 {
-    for (int i = 0; i < mn; i++)
-        for (int j = 0; j < mn; j++)
+    for (int i = 0; i < 11; i++)
+        for (int j = 0; j < 11; j++)
             argv_des[i][j] = argv_srs[i][j];
     return 0;
 }
@@ -430,6 +430,18 @@ int KM75_arraySwapRow(float argv_des[11][11], int r1, int r2)
         aux = argv_des[r2][i];
         argv_des[r2][i] = argv_des[r1][i];
         argv_des[r1][i] = aux;
+    }
+    return 0;
+}
+
+int KM75_arraySwapCol(float argv_des[11][11], int c1, int c2)
+{
+    float aux;
+    for (int i = 0; i <= mn; i++)
+    {
+        aux = argv_des[i][c2];
+        argv_des[i][c2] = argv_des[i][c1];
+        argv_des[i][c1] = aux;
     }
     return 0;
 }
@@ -495,20 +507,20 @@ int KM75_arrayBkwdSubs(float argv_des[11][11], float argv_src[11][11])
 */
 int KM75_arrayGaussian(float argv_des[11][11], float argv_src[11][11])
 {
-    float argv_mem[11][11];
-    KM75_arrayEditor(true, argv_mem);
+    float mem[11][11];
+    KM75_arrayEditor(true, mem);
     printf("\n%s\n", GAUSSIAN_MATRIX_TEXT); //O(1)
-    KM75_scanConstants(argv_mem, argv_src);
-    int principal_index_zeroed = KM75_arrayFwdElim(argv_mem);
+    KM75_scanConstants(mem, argv_src);
+    int principal_index_zeroed = KM75_arrayFwdElim(mem);
     if (principal_index_zeroed != -1)
     {
-        if (argv_mem[principal_index_zeroed][mn])
+        if (mem[principal_index_zeroed][mn])
             printf("\n%s\n", MATRIX_INCONSISTANT);
         else
             printf("\n%s\n", MATRIX_INFINITE);
         return 0;
     }
-    KM75_arrayBkwdSubs(argv_des, argv_mem);
+    KM75_arrayBkwdSubs(argv_des, mem);
     KM75_arrayPrinter(true, argv_des);
     return 0;
 }
@@ -540,7 +552,7 @@ int KM75_arraySarrus(float argv_src[11][11])
     if (mn == 2)
         d = (argv_des[0][0] * argv_des[1][1]) - (argv_des[1][0] * argv_des[0][1]);
     printf("\n%s %.2f\n", PRINT_RES_TEXT, d);
-    return 0;
+    return d;
 }
 
 /*
@@ -557,6 +569,47 @@ int KM75_arrayTranspose(float argv_des[11][11], float argv_src[11][11])
             argv_des[j][i] = argv_src[i][j];
     KM75_arrayPrinter(false, argv_des);
     return 0;
+}
+
+float KM75_diagonalProduct(float argv_src[11][11])
+{
+    float det = 1;
+    for (int i = 0; i < mn; i++)
+        det *= argv_src[i][i];
+
+    return det;
+}
+
+int KM75_arrayCramer(float argv_des[11][11], float argv_src[11][11])
+{
+    float res[11][11];
+    float ds = 0;
+
+    printf("\n%s\n", CRAMER_MATRIX_TEXT); //O(1)
+
+    KM75_arrayEditor(true, res);
+    KM75_scanConstants(res, argv_src);
+
+    for (int i = 0; i <= mn; i++)
+    {
+        float aux[11][11];
+        KM75_arrayMemcpy(aux, res);
+        if (i != 0)
+            KM75_arraySwapCol(aux, i - 1, mn);
+        int principal_index_zeroed = KM75_arrayFwdElim(aux);
+        if (principal_index_zeroed != -1)
+        {
+            if (aux[principal_index_zeroed][mn])
+                printf("\n%s\n", MATRIX_INCONSISTANT);
+            else
+                printf("\n%s\n", MATRIX_INFINITE);
+            return 0;
+        }
+        argv_des[i == 0 ? mn : i - 1][0] = KM75_diagonalProduct(aux);
+    }
+    for (int i = 0; i < mn; i++)
+        argv_des[i][0] /= argv_des[mn][0];
+    KM75_arrayPrinter(true, argv_des);
 }
 
 /*
@@ -622,7 +675,7 @@ bool KM75_appBootstrapper(bool by_passing, char option)
             printf("\n %s \n", DISABLED_WARNING);
             return true;
         }
-        // [ ]TODO Crammer Method on matrix A
+        KM75_arrayCramer(sys, matrix_a);
         break;
     case 'g':
     case 'G':
