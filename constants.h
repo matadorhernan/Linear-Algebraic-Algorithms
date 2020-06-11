@@ -1,4 +1,3 @@
-
 extern const char EXIT_TEXT[] = "Closing App";                                                      // (editable) closing
 extern const int MAX_MATRIX_SIZE = 10;                                                              // (editable 85, 86, 87) max size of square matrix
 extern const int MIN_MATRIX_SIZE = 2;                                                               // (readonly) min size of square matrix
@@ -10,7 +9,7 @@ extern const char SUM_MATRIX_TEXT[] = "Sum of A and B: ";                       
 extern const char GAUSSIAN_MATRIX_TEXT[] = "Performing Gaussian Elimination on Matrix A";           // (editable) before gaussian matrix
 extern const char CRAMER_MATRIX_TEXT[] = "Solving Matrix A with Cramer's Rule";                     // (editable) before gaussian matrix
 extern const char MATRIX_INFINITE[] = "Detected infinitely many solutions.";                        // (editable) system with too many answers
-extern const char MATRIX_INCONSISTANT[] = "Invalid, system is inconsistant.";                       // (editable) system with no answers
+extern const char MATRIX_INCONSISTANT[] = "Invalid, system is inconsistent.";                       // (editable) system with no answers
 extern const char RESET_MATRIX_WARNING[] = "This will reset A and B";                               // (editable) before scanning matrix again
 extern const char INPUT_MATRIX_SIZE[] = "Squared Matrix, enter size: ";                             // (editable) before scanning int matrix size
 extern const char ERROR_MATRIX_SIZE[] = "Invalid, min is 2, max is ";                               // (editable) error on maxout

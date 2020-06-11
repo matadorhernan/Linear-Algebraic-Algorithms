@@ -70,8 +70,11 @@ int KM75_arraySum(float argv_a[11][11], float argv_b[11][11]);
 int KM75_arrayMemcpy(float argv_des[11][11], float argv_srs[11][11]);
 int KM75_scanConstants(float argv_des[11][11], float argv_src[11][11]);
 int KM75_arraySwapRow(float argv_des[11][11], int r1, int r2);
+int KM75_arraySwapCol(float argv_des[11][11], int c1, int c2);
 int KM75_arrayBkwdSubs(float argv_des[11][11], float argv_src[11][11]);
 int KM75_arrayGaussian(float argv_des[11][11], float argv_src[11][11]);
+float KM75_diagonalProduct(float argv_src[11][11]);
+int KM75_arrayCramer(float argv_des[11][11], float argv_src[11][11]);
 int KM75_arraySarrus(float argv_src[11][11]);
 int KM75_arrayTranspose(float argv_des[11][11], float argv_src[11][11]);
 bool KM75_appBootstrapper(bool by_passing, char option);
@@ -434,6 +437,13 @@ int KM75_arraySwapRow(float argv_des[11][11], int r1, int r2)
     return 0;
 }
 
+/*
+* $exec KM75_arraySwapCol
+* This block swaps instructed columns from {{res}}, so basically c1 and c2 swap positions inside the array.
+* Time complexity: O(N).
+*
+* @return int 0 : this block returns 0 when it ends its execution 
+*/
 int KM75_arraySwapCol(float argv_des[11][11], int c1, int c2)
 {
     float aux;
@@ -447,13 +457,13 @@ int KM75_arraySwapCol(float argv_des[11][11], int c1, int c2)
 }
 
 /*
-* $exec KM75_arrayFwdElim 
+* $exec KM75_arrayTraingular 
 * This block expects {{res}} to be a square matrix with an extra column of defined constants <<res[mn-1][mn] is defined>>. This block will swap rows and perform other matrix operations to zero all numbers below {{res}}'s main diagonal. If the main diagonal has a row with a zeroed pivot that cannot be swapped for another row then this system returns the index of said pivot. 
 * Time complexity: O(N^3).
 *
 * @return int -1 : this block returns -1 when the system can be solved, otherwise return an index of a zeroed pivot which will cause infinitely many solutions or no solutions at all.
 */
-int KM75_arrayFwdElim(float argv_des[11][11])
+int KM75_arrayTraingular(float argv_des[11][11])
 {
     for (int i = 0; i < mn; i++)
     {
@@ -511,7 +521,7 @@ int KM75_arrayGaussian(float argv_des[11][11], float argv_src[11][11])
     KM75_arrayEditor(true, mem);
     printf("\n%s\n", GAUSSIAN_MATRIX_TEXT); //O(1)
     KM75_scanConstants(mem, argv_src);
-    int principal_index_zeroed = KM75_arrayFwdElim(mem);
+    int principal_index_zeroed = KM75_arrayTraingular(mem);
     if (principal_index_zeroed != -1)
     {
         if (mem[principal_index_zeroed][mn])
@@ -571,6 +581,13 @@ int KM75_arrayTranspose(float argv_des[11][11], float argv_src[11][11])
     return 0;
 }
 
+/*
+* $exec KM75_diagonalProduct 
+* This block finds the determinant of a traingular matrix, matrix needs to be squared <<nxn>>.
+* Time complexity: O(N)
+*
+* @return int det : this block returns det when it ends its execution 
+*/
 float KM75_diagonalProduct(float argv_src[11][11])
 {
     float det = 1;
@@ -580,23 +597,27 @@ float KM75_diagonalProduct(float argv_src[11][11])
     return det;
 }
 
+/*
+* $exec KM75_arrayCramer 
+* This function will execute other blocks, related to cramer's rule. And predict if the system of equations can or cannot be solved.
+* Time complexity: unknown.
+*
+* @return int 0 : this block returns 0 when it ends its execution 
+*/
 int KM75_arrayCramer(float argv_des[11][11], float argv_src[11][11])
 {
     float res[11][11];
     float ds = 0;
-
     printf("\n%s\n", CRAMER_MATRIX_TEXT); //O(1)
-
     KM75_arrayEditor(true, res);
     KM75_scanConstants(res, argv_src);
-
     for (int i = 0; i <= mn; i++)
     {
         float aux[11][11];
         KM75_arrayMemcpy(aux, res);
         if (i != 0)
             KM75_arraySwapCol(aux, i - 1, mn);
-        int principal_index_zeroed = KM75_arrayFwdElim(aux);
+        int principal_index_zeroed = KM75_arrayTraingular(aux);
         if (principal_index_zeroed != -1)
         {
             if (aux[principal_index_zeroed][mn])
