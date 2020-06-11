@@ -11,7 +11,7 @@ This executable is been programmed entirely using both a <b>GCC</b> product, and
 | Algorithm           | Usage         | Time Complexity   |
 | ------------------- | ------------- | ----------------- |
 | KM75_arrayDot       | Dot Product   | O(N^3 + 2N^2 + N) |
-| KM75_arraySum       | Array Sum     | O(3N^2 + N + 1)   |
+| KM75_arraySum       | Sumation     | O(3N^2 + N + 1)   |
 | KM75_arrayGaussian  | Solve Systems | User dependant    |
 | KM75_arrayCramer    | Solve Systems | User dependant    |
 | KM75_arraySarrus    | Determinats   | O(N^2 + N)        |
