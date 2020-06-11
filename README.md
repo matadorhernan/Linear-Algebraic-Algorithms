@@ -1,4 +1,4 @@
-# Keyboard Math 75
+# Linear Alogorithms
 
 ## Description
 
