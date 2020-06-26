@@ -1,4 +1,4 @@
-# Keyboard Math 75
+# Linear Algebra Represented in C
 
 ## Description
 
