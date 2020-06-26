@@ -21,7 +21,7 @@
     Date: 6/4/2020
 
     RUN
-    gcc main.c -o main
+    gcc main.min.c -o mk75
 
     MODIFIED
     * Created       5 Jun 2020      Michaus M. , &. Romero M.A.;
