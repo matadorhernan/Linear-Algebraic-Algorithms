@@ -1,4 +1,4 @@
-# Alogorithms for Linear Algebra and Matrixes
+# Keyboard Math 75
 
 ## Description
 
