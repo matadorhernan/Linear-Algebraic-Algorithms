@@ -25,4 +25,4 @@ This executable is been programmed entirely using both a <b>GCC</b> product, and
 
 ## Run
 
-    gcc main.c -o main
+    gcc main.c -o mk75
